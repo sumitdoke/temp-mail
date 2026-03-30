@@ -8,10 +8,13 @@ const supabase = createClient(
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
-  const recipient = `${params.id}@tempmail.in`;
+  // Next.js 15 — params is now a Promise, must await
+  const { id } = await context.params;
   
+  const recipient = `${id}@tempmail.in`;
+
   const { data, error } = await supabase
     .from('emails')
     .select('*')
@@ -19,7 +22,10 @@ export async function GET(
     .order('created_at', { ascending: false });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json(data || []);
