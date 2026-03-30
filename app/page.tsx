@@ -1,65 +1,184 @@
-import Image from "next/image";
+'use client';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    generateEmail();
+  }, []);
+
+  useEffect(() => {
+    if (!email) return;
+    const interval = setInterval(() => fetchInbox(), 5000);
+    return () => clearInterval(interval);
+  }, [email]);
+
+  const generateEmail = async () => {
+    setLoading(true);
+    const res = await fetch('/api/generate');
+    const data = await res.json();
+    setEmail(data.email);
+    setMessages([]);
+    setLoading(false);
+  };
+
+  const fetchInbox = async () => {
+    if (!email) return;
+    const id = email.split('@')[0];
+    const res = await fetch(`/api/inbox/${id}`);
+    const data = await res.json();
+    setMessages(data);
+  };
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen bg-gray-950 text-white">
+
+      {/* Header */}
+      <div className="bg-gray-900 border-b border-gray-800 px-4 py-4">
+        <div className="max-w-2xl mx-auto flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-blue-400">
+              ⚡ TempMail.in
+            </h1>
+            <p className="text-gray-400 text-xs">
+              Free disposable email — India
+            </p>
+          </div>
+          <span className="text-xs bg-green-900 text-green-400
+            px-2 py-1 rounded-full">
+            Live
+          </span>
+        </div>
+      </div>
+
+      <div className="max-w-2xl mx-auto px-4 py-8">
+
+        {/* Email Box */}
+        <div className="bg-gray-900 rounded-2xl p-6 mb-6
+          border border-gray-800">
+          <p className="text-gray-400 text-sm mb-2">
+            Your temporary email address:
           </p>
+
+          {loading ? (
+            <div className="text-gray-500 animate-pulse">
+              Generating email...
+            </div>
+          ) : (
+            <span className="text-lg font-mono font-bold
+              text-white break-all">
+              {email}
+            </span>
+          )}
+
+          {/* Action Buttons */}
+          <div className="flex gap-3 mt-4 flex-wrap">
+            <button
+              onClick={copyEmail}
+              className="bg-blue-600 hover:bg-blue-700
+                text-white px-4 py-2 rounded-lg text-sm
+                font-medium transition-all"
+            >
+              {copied ? '✅ Copied!' : '📋 Copy Email'}
+            </button>
+            <button
+              onClick={generateEmail}
+              className="bg-gray-700 hover:bg-gray-600
+                text-white px-4 py-2 rounded-lg text-sm
+                font-medium transition-all"
+            >
+              🔄 New Email
+            </button>
+          </div>
+
+          {/* Simple 24hr text */}
+          <div className="mt-4 text-xs text-gray-500">
+            ⏱ Valid for
+            <span className="text-yellow-400 ml-1">
+              24 hours
+            </span>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Inbox */}
+        <div className="bg-gray-900 rounded-2xl border border-gray-800">
+          <div className="px-6 py-4 border-b border-gray-800
+            flex items-center justify-between">
+            <h2 className="font-semibold text-gray-200">
+              📬 Inbox
+            </h2>
+            <span className="text-xs text-gray-500">
+              Auto-refreshes every 5s
+            </span>
+          </div>
+
+          {messages.length === 0 ? (
+            <div className="px-6 py-12 text-center text-gray-600">
+              <div className="text-4xl mb-3">📭</div>
+              <p>No emails yet</p>
+              <p className="text-xs mt-1">
+                Use the email above to sign up anywhere
+              </p>
+            </div>
+          ) : (
+            <div>
+              {messages.map((msg: any) => (
+                <div key={msg.id}
+                  className="px-6 py-4 border-b border-gray-800
+                    hover:bg-gray-800 transition-all cursor-pointer">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="font-medium text-white text-sm">
+                        {msg.subject || 'No Subject'}
+                      </p>
+                      <p className="text-gray-500 text-xs mt-1">
+                        From: {msg.sender}
+                      </p>
+                    </div>
+                    <span className="text-gray-600 text-xs">
+                      {new Date(msg.created_at)
+                        .toLocaleTimeString('en-IN')}
+                    </span>
+                  </div>
+                  <p className="text-gray-400 text-xs mt-2
+                    line-clamp-2">
+                    {msg.body_plain}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      </main>
-    </div>
+
+        {/* Footer */}
+        <p className="text-center text-gray-700 text-xs mt-8">
+          Emails auto-delete after 24 hours • No signup required
+          <br />
+          Made for India 🇮🇳
+          <br />
+          <span className="mt-2 flex justify-center gap-4">
+            <a href="/privacy"
+              className="text-gray-600 hover:text-gray-400">
+              Privacy Policy
+            </a>
+            <a href="/terms"
+              className="text-gray-600 hover:text-gray-400">
+              Terms of Service
+            </a>
+          </span>
+        </p>
+
+      </div>
+    </main>
   );
 }
