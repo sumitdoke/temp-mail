@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     const { keyword } = await req.json();
 
     const { text } = await generateText({
-      model: google('gemini-1.5-flash-latest'),
+      model: google('gemini-2.5-flash-lite'),
       prompt: `
         You are an SEO content writer for 
         tempmailin.in - an Indian temp mail website.
