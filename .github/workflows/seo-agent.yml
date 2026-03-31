@@ -13,8 +13,9 @@ jobs:
     steps:
       - name: Trigger SEO Agent
         run: |
-          response=$(curl -s -X POST \
-          ${{ secrets.SITE_URL }}/api/agent/auto \
-          -H "Content-Type: application/json" \
-          -d '{"secret": "${{ secrets.AGENT_SECRET }}"}')
-          echo "Agent Response: $response"
+          response=$(curl -s \
+            --request POST \
+            --url "${{ secrets.SITE_URL }}/api/agent/auto" \
+            --header 'Content-Type: application/json' \
+            --data '{"secret":"${{ secrets.AGENT_SECRET }}"}')
+          echo "Response: $response"
