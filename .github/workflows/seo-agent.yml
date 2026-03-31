@@ -1,0 +1,19 @@
+name: Daily SEO Agent
+
+on:
+  schedule:
+    # Runs 3 times per day!
+    - cron: '30 3 * * *'   # 9 AM India
+    - cron: '30 9 * * *'   # 3 PM India
+    - cron: '30 15 * * *'  # 9 PM India
+  workflow_dispatch:
+
+jobs:
+  run-seo-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger SEO Agent
+        run: |
+          curl -X POST ${{ secrets.SITE_URL }}/api/agent/auto \
+          -H "Content-Type: application/json" \
+          -d '{"secret": "${{ secrets.AGENT_SECRET }}"}'
