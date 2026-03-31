@@ -3,44 +3,44 @@ import { google } from '@ai-sdk/google';
 import { generateText } from 'ai';
 
 export async function POST(req: Request) {
-  const { keyword } = await req.json();
+  try {
+    const { keyword } = await req.json();
 
-  const { text } = await generateText({
-    model: google('gemini-1.5-flash'),
-    prompt: `
-      You are an expert SEO content writer for an 
-      Indian temp mail website called tempmailin.in
-      
-      Write a complete SEO optimized article for:
-      Keyword: "${keyword}"
-      
-      Requirements:
-      - Title (catchy, keyword included)
-      - Meta description (under 160 chars)
-      - Main article (800+ words)
-      - Target Indian users
-      - Simple English + some Hindi words
-      - Include step by step how to use temp mail
-      - FAQ section (5 questions)
-      - Natural keyword usage
-      
-      Return ONLY this JSON format:
-      {
-        "slug": "url-friendly-slug",
-        "title": "Page Title Here",
-        "meta": "Meta description here",
-        "content": "Full article content here",
-        "faqs": [
-          {"q": "Question?", "a": "Answer"}
-        ]
-      }
-    `
-  });
+    const { text } = await generateText({
+      model: google('gemini-1.5-flash'),
+      prompt: `
+        You are an SEO content writer for 
+        tempmailin.in - an Indian temp mail website.
+        
+        Write SEO article for: "${keyword}"
+        
+        Return ONLY valid JSON, no markdown, no backticks:
+        {
+          "slug": "url-slug-here",
+          "title": "Title Here",
+          "meta": "Meta description under 160 chars",
+          "content": "Full article 800+ words",
+          "faqs": [
+            {"q": "Question?", "a": "Answer here"}
+          ]
+        }
+      `
+    });
 
-  // Clean and parse response
-  const clean = text.replace(/```json|```/g, '').trim();
-  const article = JSON.parse(clean);
-  
+    // Better JSON cleaning
+    let clean = text.trim();
+    clean = clean.replace(/```json/g, '');
+    clean = clean.replace(/```/g, '');
+    clean = clean.trim();
 
-  return NextResponse.json(article);
+    const article = JSON.parse(clean);
+    return NextResponse.json(article);
+
+  } catch (error: any) {
+    console.error('SEO Agent Error:', error);
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
+  }
 }
