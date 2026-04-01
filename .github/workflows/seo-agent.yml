@@ -13,14 +13,14 @@ jobs:
     steps:
       - name: Trigger SEO Agent
         run: |
-          response=$(curl -s \
+          response=$(curl -s -L \
             --max-time 60 \
             --request POST \
             --url "${{ secrets.SITE_URL }}/api/agent/auto" \
             --header 'Content-Type: application/json' \
             --data '{"secret":"${{ secrets.AGENT_SECRET }}"}')
           echo "Response: $response"
-          
+
       - name: Check Response
         run: |
-          echo "Agent completed successfully"
+          echo "Agent completed!"
