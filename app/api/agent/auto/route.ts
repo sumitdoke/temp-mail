@@ -99,8 +99,8 @@ export async function POST(req: Request) {
 
         // Clean JSON
         let clean = text.trim()
-            .replace(/'''json/g, '')
-            .replace(/'''/g, '')
+            .replace(/```json/g, '')
+            .replace(/```/g, '')
             .trim();
 
         const article = JSON.parse(clean);
