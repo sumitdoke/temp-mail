@@ -64,7 +64,8 @@ export default function Test() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                keyword: 'temp mail for phonepe india'
+                keyword: 'temp mail for phonepe india',
+                secret: 'tempmail2026' // Add this!
             })
         });
         const data = await res.json();
