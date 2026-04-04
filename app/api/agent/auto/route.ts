@@ -14,6 +14,14 @@ const SECRET = process.env.AGENT_SECRET || 'tempmail2026';
 // Agent already researched these — best India keywords 
 const KEYWORDS = [
 
+
+    // ── Instagram (Already working!) ────────────
+    "temp mail for instagram",
+    "temp mail for multiple instagram accounts",
+    "temp mail for instagram verification",
+    "temp mail for instagram reels",
+    "fake email for instagram signup",
+
     // ── USA Traffic (Highest CPM!) ──────────────
     "best temp mail usa 2026",
     "temporary email address usa free",
@@ -84,12 +92,6 @@ const KEYWORDS = [
     "temp mail for openai",
     "temp mail for microsoft",
 
-    // ── Instagram (Already working!) ────────────
-    "temp mail for instagram",
-    "temp mail for multiple instagram accounts",
-    "temp mail for instagram verification",
-    "temp mail for instagram reels",
-    "fake email for instagram signup",
 
     // ── India Specific ───────────────────────────
     "temp mail for phonepe india",

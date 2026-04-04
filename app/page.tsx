@@ -1,6 +1,23 @@
 'use client';
 import { useState, useEffect } from 'react';
 
+export const metadata = {
+  title: 'TempMail.in — Free Disposable Email India 2026',
+  description: 'Get instant free temporary email address instantly. No signup required. Auto-deletes in 24 hours. Works for Swiggy, Zomato, Instagram and more. Made for India.',
+  keywords: 'temp mail, temporary email, disposable email india, fake email, temp mail india 2026',
+  alternates: {
+    canonical: 'https://tempmailin-psi.vercel.app'
+  },
+  openGraph: {
+    title: 'TempMail.in — Free Disposable Email India',
+    description: 'Instant disposable email. No signup. Auto-deletes in 24hrs.',
+    url: 'https://tempmailin-psi.vercel.app',
+    siteName: 'TempMailin.in',
+    locale: 'en_IN',
+    type: 'website',
+  }
+};
+
 export default function Home() {
   const [email, setEmail] = useState('');
   const [messages, setMessages] = useState([]);

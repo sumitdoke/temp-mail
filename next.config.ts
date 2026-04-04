@@ -1,36 +1,47 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Image optimization
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+  // Compress responses
+  compress: true,
+  // Remove powered by header
+  poweredByHeader: false,
+
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
-          // Prevent clickjacking
+          // ── Security Headers ──────────────────
           {
             key: 'X-Frame-Options',
             value: 'DENY'
           },
-          // Prevent MIME sniffing
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff'
           },
-          // XSS Protection
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block'
           },
-          // Referrer Policy
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin'
           },
-          // Permissions Policy
+          // ✅ Permissions Policy BACK!
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()'
-          }
+          },
+          // ── Performance Headers ───────────────
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600'
+          },
         ]
       }
     ];
