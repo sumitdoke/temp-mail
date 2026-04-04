@@ -1,61 +1,58 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export default function HomeClient() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string>('');
   const [messages, setMessages] = useState<any[]>([]);
-  const [copied, setCopied] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    generateEmail();
-  }, []);
-
-  useEffect(() => {
-    if (!email) return;
-
-    // Fetch immediately when email changes
-    fetchInbox();
-
-    // Then poll every 5 seconds
-    const interval = setInterval(() => fetchInbox(), 5000);
-    return () => clearInterval(interval);
-  }, [email]); // ← email dependency is key!
-
-  const generateEmail = async () => {
+  const generateEmail = useCallback(async () => {
     setLoading(true);
-    setEmail(''); // Clear first!
-    setMessages([]); // Clear inbox!
-
+    setMessages([]);
+    
     try {
-      const res = await fetch('/api/generate');
+      const res = await fetch('/api/generate', {
+        cache: 'no-store' // Force fresh request!
+      });
       const data = await res.json();
-
-      if (data.email) {
-        setEmail(data.email);
-      }
-    } catch (error) {
-      console.error('Failed to generate email:', error);
+      console.log('Generated email:', data); // Debug log
+      setEmail(data.email);
+    } catch (err) {
+      console.error('Error:', err);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const fetchInbox = async () => {
-    if (!email) return;
-
+  const fetchInbox = useCallback(async (currentEmail: string) => {
+    if (!currentEmail) return;
     try {
-      const id = email.split('@')[0];
-      const res = await fetch(`/api/inbox/${id}`);
+      const id = currentEmail.split('@')[0];
+      const res = await fetch(`/api/inbox/${id}`, {
+        cache: 'no-store'
+      });
       const data = await res.json();
-
-      if (Array.isArray(data)) {
-        setMessages(data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch inbox:', error);
+      if (Array.isArray(data)) setMessages(data);
+    } catch (err) {
+      console.error('Inbox error:', err);
     }
-  };
+  }, []);
+
+  // Generate on load
+  useEffect(() => {
+    generateEmail();
+  }, [generateEmail]);
+
+  // Poll inbox when email changes
+  useEffect(() => {
+    if (!email) return;
+    fetchInbox(email);
+    const interval = setInterval(
+      () => fetchInbox(email), 5000
+    );
+    return () => clearInterval(interval);
+  }, [email, fetchInbox]);
 
   const copyEmail = () => {
     navigator.clipboard.writeText(email);
@@ -94,7 +91,7 @@ export default function HomeClient() {
           </p>
 
           {loading ? (
-            <div className="text-gray-500 animate-pulse">
+            <div className="text-gray-500 animate-pulse text-lg">
               Generating email...
             </div>
           ) : (
@@ -104,27 +101,28 @@ export default function HomeClient() {
             </span>
           )}
 
-          {/* Action Buttons */}
+          {/* Buttons */}
           <div className="flex gap-3 mt-4 flex-wrap">
             <button
               onClick={copyEmail}
+              disabled={!email || loading}
               className="bg-blue-600 hover:bg-blue-700
-                text-white px-4 py-2 rounded-lg text-sm
-                font-medium transition-all"
+                disabled:opacity-50 text-white px-4 py-2
+                rounded-lg text-sm font-medium transition-all"
             >
               {copied ? '✅ Copied!' : '📋 Copy Email'}
             </button>
             <button
               onClick={generateEmail}
+              disabled={loading}
               className="bg-gray-700 hover:bg-gray-600
-                text-white px-4 py-2 rounded-lg text-sm
-                font-medium transition-all"
+                disabled:opacity-50 text-white px-4 py-2
+                rounded-lg text-sm font-medium transition-all"
             >
-              🔄 New Email
+              {loading ? '⏳ Generating...' : '🔄 New Email'}
             </button>
           </div>
 
-          {/* 24hr text */}
           <div className="mt-4 text-xs text-gray-500">
             ⏱ Valid for
             <span className="text-yellow-400 ml-1">
@@ -158,7 +156,7 @@ export default function HomeClient() {
               {messages.map((msg: any) => (
                 <div key={msg.id}
                   className="px-6 py-4 border-b border-gray-800
-                    hover:bg-gray-800 transition-all cursor-pointer">
+                    hover:bg-gray-800 transition-all">
                   <div className="flex justify-between items-start">
                     <div>
                       <p className="font-medium text-white text-sm">
