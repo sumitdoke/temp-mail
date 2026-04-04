@@ -11,14 +11,92 @@ const supabase = createClient(
 const SECRET = process.env.AGENT_SECRET || 'tempmail2026';
 
 // Pre-researched keywords — no API call needed!
-// Agent already researched these — best India keywords
+// Agent already researched these — best India keywords 
 const KEYWORDS = [
+
+    // ── USA Traffic (Highest CPM!) ──────────────
+    "best temp mail usa 2026",
+    "temporary email address usa free",
+    "disposable email for amazon usa",
+    "temp mail for netflix usa",
+    "fake email generator usa",
+    "temp mail no registration usa",
+    "throwaway email address usa",
+    "burner email address usa",
+    "temp mail for paypal usa",
+    "disposable email for reddit usa",
+
+    // ── UK Traffic (67% US CPM) ─────────────────
+    "temp mail uk free 2026",
+    "disposable email uk no signup",
+    "temporary email address uk",
+    "fake email uk free",
+    "temp mail for amazon uk",
+    "burner email uk",
+    "throwaway email uk",
+    "temp mail for ebay uk",
+
+    // ── Canada Traffic (62% US CPM) ─────────────
+    "temp mail canada free",
+    "disposable email canada",
+    "temporary email canada no signup",
+    "fake email address canada",
+    "temp mail for amazon canada",
+
+    // ── Australia Traffic (59% US CPM) ──────────
+    "temp mail australia free",
+    "disposable email australia",
+    "temporary email address australia",
+    "fake email australia",
+    "temp mail for netflix australia",
+
+    // ── Germany Traffic ─────────────────────────
+    "temp mail germany free",
+    "disposable email germany",
+    "temporary email address germany",
+    "wegwerf email kostenlos 2026",
+
+    // ── Global High Traffic ──────────────────────
+    "best free temp mail 2026",
+    "temp mail without phone number",
+    "disposable email address free",
+    "10 minute mail alternative 2026",
+    "guerrilla mail alternative 2026",
+    "temp mail that works 2026",
+    "fake email address generator free",
+    "temporary email no verification",
+    "instant temp mail free",
+    "temp mail for social media",
+
+    // ── Use Case Specific (High Intent) ─────────
+    "temp mail for free trial",
+    "temp mail for discord",
+    "temp mail for reddit",
+    "temp mail for spotify",
+    "temp mail for steam",
+    "temp mail for roblox",
+    "temp mail for gaming",
+    "temp mail for tiktok",
+    "temp mail for twitter",
+    "temp mail for linkedin",
+    "temp mail for github",
+    "temp mail for chatgpt",
+    "temp mail for openai",
+    "temp mail for microsoft",
+
+    // ── Instagram (Already working!) ────────────
+    "temp mail for instagram",
+    "temp mail for multiple instagram accounts",
+    "temp mail for instagram verification",
+    "temp mail for instagram reels",
+    "fake email for instagram signup",
+
+    // ── India Specific ───────────────────────────
     "temp mail for phonepe india",
     "temp mail for swiggy india",
     "temp mail for meesho india",
     "temp mail for hotstar india",
     "temp mail for cred india",
-    "temp mail for rapido india",
     "temp mail for zomato india",
     "temp mail for myntra india",
     "temp mail for flipkart india",
@@ -27,22 +105,14 @@ const KEYWORDS = [
     "temp mail for whatsapp india",
     "temp mail for telegram india",
     "temp mail for youtube india",
-    "temp mail for spotify india",
     "temp mail for gpay india",
     "temp mail for paytm india",
     "temp mail for groww india",
     "temp mail for blinkit india",
-    "temp mail for zepto india",
-    "temp mail for nykaa india",
-    "temp mail for ajio india",
-    "temp mail for ola india",
-    "temp mail for uber india",
-    "temp mail for sonyliv india",
+    "temp mail for rapido india",
     "disposable email for otp india",
-    "fake email generator india 2026",
-    "temp mail hindi",
+    "temp mail hindi 2026",
     "best temp mail india 2026",
-    "free temporary email india"
 ];
 
 export async function POST(req: Request) {
