@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 export default function HomeClient() {
   const [email, setEmail] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<any[]>([]);
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -13,25 +13,48 @@ export default function HomeClient() {
 
   useEffect(() => {
     if (!email) return;
+
+    // Fetch immediately when email changes
+    fetchInbox();
+
+    // Then poll every 5 seconds
     const interval = setInterval(() => fetchInbox(), 5000);
     return () => clearInterval(interval);
-  }, [email]);
+  }, [email]); // ← email dependency is key!
 
   const generateEmail = async () => {
     setLoading(true);
-    const res = await fetch('/api/generate');
-    const data = await res.json();
-    setEmail(data.email);
-    setMessages([]);
-    setLoading(false);
+    setEmail(''); // Clear first!
+    setMessages([]); // Clear inbox!
+
+    try {
+      const res = await fetch('/api/generate');
+      const data = await res.json();
+
+      if (data.email) {
+        setEmail(data.email);
+      }
+    } catch (error) {
+      console.error('Failed to generate email:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchInbox = async () => {
     if (!email) return;
-    const id = email.split('@')[0];
-    const res = await fetch(`/api/inbox/${id}`);
-    const data = await res.json();
-    setMessages(data);
+
+    try {
+      const id = email.split('@')[0];
+      const res = await fetch(`/api/inbox/${id}`);
+      const data = await res.json();
+
+      if (Array.isArray(data)) {
+        setMessages(data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch inbox:', error);
+    }
   };
 
   const copyEmail = () => {
