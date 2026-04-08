@@ -133,7 +133,11 @@ export default function HomeClient() {
         </div>
 
         {/* Ad  */}
-        <AdBanner adKey='363db0065e45178cfa21464d3889b752' height={250} width={300} />
+        <AdBanner
+          adKey="363db0065e45178cfa21464d3889b752"
+          height={250}
+          width={300}
+        />
 
         {/* Inbox */}
         <div className="bg-gray-900 rounded-2xl border border-gray-800">
@@ -186,7 +190,11 @@ export default function HomeClient() {
         </div>
 
         {/* 320*50 */}
-        <AdBanner adKey='8417fd24a6f755b707c66c5e90f75362' height={50} width={320} />
+         <AdBanner
+          adKey="8417fd24a6f755b707c66c5e90f75362"
+          height={50}
+          width={320}
+        />
 
         {/* Footer */}
         <p className="text-center text-gray-700 text-xs mt-8">

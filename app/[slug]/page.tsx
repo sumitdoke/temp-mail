@@ -390,7 +390,11 @@ export default async function SEOPage(
         </article>
 
         {/* ad  */}
-        <AdBanner adKey='285f7a3a830b78ba2bc47f294129ec09' height={250} width={300} />
+        <AdBanner
+          adKey="285f7a3a830b78ba2bc47f294129ec09"
+          height={250}
+          width={300}
+        />
 
 
         {/* ── Middle CTA ── */}
@@ -413,7 +417,11 @@ export default async function SEOPage(
         </div>
 
         {/* ad  */}
-        <AdBanner adKey='285f7a3a830b78ba2bc47f294129ec09' height={250} width={300} />
+        <AdBanner
+          adKey="285f7a3a830b78ba2bc47f294129ec09"
+          height={250}
+          width={300}
+        />
 
         {/* ── FAQ Section ── */}
         {page.faqs && page.faqs.length > 0 && (

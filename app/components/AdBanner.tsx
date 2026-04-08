@@ -1,8 +1,9 @@
-'use client'
-import { useEffect } from "react"
+'use client';
+import { useEffect } from 'react';
+
 declare global {
     interface Window {
-        atoptions: any;
+        atOptions: any;
     }
 }
 
@@ -19,7 +20,7 @@ export default function AdBanner({
 }: AdBannerProps) {
 
     useEffect(() => {
-        window.atoptions = {
+        window.atOptions = {
             'key': adKey,
             'format': 'iframe',
             'height': height,
@@ -27,17 +28,17 @@ export default function AdBanner({
             'params': {}
         };
 
-        const script= document.createElement('script');
-        script.src = `//www.higherformanceformat.com/${adKey}/invoke.js`;
+        const script = document.createElement('script');
+        script.src = `//www.highperformanceformat.com/${adKey}/invoke.js`;
         script.async = true;
         document.getElementById(`ad-${adKey}`)?.appendChild(script);
-    }, [adKey,height,width]);
+    }, [adKey, height, width]);
 
     return (
         <div
-        id={`ad-${adKey}`}
-        className="flex justify-center my-4"
-        style={{minHeight: height}}
-        />  
+            id={`ad-${adKey}`}
+            className="flex justify-center my-4"
+            style={{ minHeight: height }}
+        />
     );
 }
