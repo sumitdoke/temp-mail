@@ -133,11 +133,19 @@ export default function HomeClient() {
         </div>
 
         {/* Ad  */}
-        <AdBanner
+        <div
+          id="container-363db0065e45178cfa21464d3889b752"></div>
+        <script
+          async data-cfasync="false"
+          src="https://pl29096623.profitablecpmratenetwork.com/363db0065e45178cfa21464d3889b752/invoke.js" />
+
+
+
+        {/* <AdBanner
           adKey="363db0065e45178cfa21464d3889b752"
           height={250}
           width={300}
-        />
+        /> */}
 
         {/* Inbox */}
         <div className="bg-gray-900 rounded-2xl border border-gray-800">
@@ -190,7 +198,7 @@ export default function HomeClient() {
         </div>
 
         {/* 320*50 */}
-         <AdBanner
+        <AdBanner
           adKey="8417fd24a6f755b707c66c5e90f75362"
           height={50}
           width={320}
