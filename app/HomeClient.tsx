@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
+import AdBanner from './components/AdBanner';
 
 export default function HomeClient() {
   const [email, setEmail] = useState<string>('');
@@ -10,7 +11,7 @@ export default function HomeClient() {
   const generateEmail = useCallback(async () => {
     setLoading(true);
     setMessages([]);
-    
+
     try {
       const res = await fetch('/api/generate', {
         cache: 'no-store' // Force fresh request!
@@ -131,6 +132,9 @@ export default function HomeClient() {
           </div>
         </div>
 
+        {/* Ad  */}
+        <AdBanner adKey='363db0065e45178cfa21464d3889b752' height={250} width={300} />
+
         {/* Inbox */}
         <div className="bg-gray-900 rounded-2xl border border-gray-800">
           <div className="px-6 py-4 border-b border-gray-800
@@ -180,6 +184,9 @@ export default function HomeClient() {
             </div>
           )}
         </div>
+
+        {/* 320*50 */}
+        <AdBanner adKey='8417fd24a6f755b707c66c5e90f75362' height={50} width={320} />
 
         {/* Footer */}
         <p className="text-center text-gray-700 text-xs mt-8">

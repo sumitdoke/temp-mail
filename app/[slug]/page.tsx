@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import ReactMarkdown from 'react-markdown';
+import AdBanner from '../components/AdBanner';
 
 // Cache page for 1 hour, revalidate automatically
 export const revalidate = 3600;
@@ -103,6 +104,8 @@ export default async function SEOPage(
 
   // 404 if page not found
   if (!page) return notFound();
+
+
 
   // ── Schema Markup (JSON-LD) ───────────────────────
 
@@ -386,6 +389,10 @@ export default async function SEOPage(
           </div>
         </article>
 
+        {/* ad  */}
+        <AdBanner adKey='285f7a3a830b78ba2bc47f294129ec09' height={250} width={300} />
+
+
         {/* ── Middle CTA ── */}
         <div className="bg-gray-900 border border-gray-800
           rounded-2xl p-5 mb-8 text-center">
@@ -404,6 +411,9 @@ export default async function SEOPage(
             Get Free Temp Mail →
           </a>
         </div>
+
+        {/* ad  */}
+        <AdBanner adKey='285f7a3a830b78ba2bc47f294129ec09' height={250} width={300} />
 
         {/* ── FAQ Section ── */}
         {page.faqs && page.faqs.length > 0 && (
