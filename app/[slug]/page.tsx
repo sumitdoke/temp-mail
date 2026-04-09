@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import ReactMarkdown from 'react-markdown';
-import AdBanner from '../components/AdBanner';
+import AdUnit from '../components/AdUnit';
 
 // Cache page for 1 hour, revalidate automatically
 export const revalidate = 3600;
@@ -297,6 +297,8 @@ export default async function SEOPage(
                     {children}
                   </h1>
                 ),
+
+
                 // H2 — section headings
                 h2: ({ children }) => (
                   <h2 className="text-xl font-bold
@@ -390,7 +392,7 @@ export default async function SEOPage(
         </article>
 
         {/* ad  */}
-        <AdBanner
+        <AdUnit
           adKey="285f7a3a830b78ba2bc47f294129ec09"
           height={250}
           width={300}
@@ -416,8 +418,8 @@ export default async function SEOPage(
           </a>
         </div>
 
-        {/* ad  */}
-        <AdBanner
+        {/* Ad before FAQ */}
+        <AdUnit
           adKey="285f7a3a830b78ba2bc47f294129ec09"
           height={250}
           width={300}

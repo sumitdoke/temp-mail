@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import AdBanner from './components/AdBanner';
+import AdUnit from './components/AdUnit';
+import NativeBannerAd from './components/NativeBannerAd';
 
 export default function HomeClient() {
   const [email, setEmail] = useState<string>('');
@@ -132,20 +133,13 @@ export default function HomeClient() {
           </div>
         </div>
 
-        {/* Ad  */}
-        <div
-          id="container-363db0065e45178cfa21464d3889b752"></div>
-        <script
-          async data-cfasync="false"
-          src="https://pl29096623.profitablecpmratenetwork.com/363db0065e45178cfa21464d3889b752/invoke.js" />
 
+        {/* Native Banner Ad */}
+        <NativeBannerAd />
 
+        {/* Inbox */}
+        <div className="bg-gray-900 rounded-2xl border border-gray-800"></div>
 
-        {/* <AdBanner
-          adKey="363db0065e45178cfa21464d3889b752"
-          height={250}
-          width={300}
-        /> */}
 
         {/* Inbox */}
         <div className="bg-gray-900 rounded-2xl border border-gray-800">
@@ -197,12 +191,17 @@ export default function HomeClient() {
           )}
         </div>
 
-        {/* 320*50 */}
-        <AdBanner
+
+        {/* 320x50 Mobile Ad */}
+        <AdUnit
           adKey="8417fd24a6f755b707c66c5e90f75362"
           height={50}
           width={320}
         />
+
+        {/* Footer */}
+        <p className="text-center text-gray-700 text-xs mt-8"></p>
+
 
         {/* Footer */}
         <p className="text-center text-gray-700 text-xs mt-8">
