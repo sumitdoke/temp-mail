@@ -420,13 +420,21 @@ export default async function SEOPage(
         </div>
 
         {/* Ad before FAQ */}
-        <AdUnit
+        {/* <AdUnit
           adKey="285f7a3a830b78ba2bc47f294129ec09"
           height={250}
           width={300}
           uniqueId="faq-ad-2"
         />
-        
+         */}
+
+        <AdUnit
+          adKey="8417fd24a6f755b707c66c5e90f75362"
+          height={50}
+          width={320}
+          uniqueId="home-mobile-ad"
+        />
+
         {/* ── FAQ Section ── */}
         {page.faqs && page.faqs.length > 0 && (
           <section className="mb-8">
