@@ -424,9 +424,9 @@ export default async function SEOPage(
           adKey="285f7a3a830b78ba2bc47f294129ec09"
           height={250}
           width={300}
-          uniqueId="faq-ad"
+          uniqueId="faq-ad-2"
         />
-
+        
         {/* ── FAQ Section ── */}
         {page.faqs && page.faqs.length > 0 && (
           <section className="mb-8">

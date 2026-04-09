@@ -22,8 +22,10 @@ export default function AdUnit({
     if (!ref.current) return;
     loaded.current = true;
 
+    // Different delay for each ad!
+    const delay = uniqueId.includes('2') ? 2000 : 1000;
+
     setTimeout(() => {
-      // Set options directly on window
       (window as any).atOptions = {
         key: adKey,
         format: 'iframe',
@@ -32,17 +34,15 @@ export default function AdUnit({
         params: {}
       };
 
-      // Load invoke script
       const script = document.createElement('script');
-      script.src = 'https://www.highperformanceformat.com/' 
+      script.src = 'https://www.highperformanceformat.com/'
         + adKey + '/invoke.js';
       script.async = true;
-      script.onerror = () => console.log('Ad blocked');
 
       if (ref.current) {
         ref.current.appendChild(script);
       }
-    }, 1000);
+    }, delay);
 
   }, [adKey, height, width, uniqueId]);
 
