@@ -5,7 +5,7 @@ interface AdUnitProps {
   adKey: string;
   height: number;
   width: number;
-  uniqueId: string; // ← Add this!
+  uniqueId: string;
 }
 
 export default function AdUnit({
@@ -19,40 +19,43 @@ export default function AdUnit({
 
   useEffect(() => {
     if (loaded.current) return;
+    if (!ref.current) return;
     loaded.current = true;
 
-    const container = document.createElement('div');
-    container.id = `ad-container-${uniqueId}`;
-    
-    // Create inline script for options
-    const optionsScript = document.createElement('script');
-    optionsScript.innerHTML = `
-      var atOptions_${uniqueId} = {
-        'key': '${adKey}',
-        'format': 'iframe',
-        'height': ${height},
-        'width': ${width},
-        'params': {}
+    setTimeout(() => {
+      // Set options directly on window
+      (window as any).atOptions = {
+        key: adKey,
+        format: 'iframe',
+        height: height,
+        width: width,
+        params: {}
       };
-      atOptions = atOptions_${uniqueId};
-    `;
 
-    // Create invoke script
-    const invokeScript = document.createElement('script');
-    invokeScript.src = `https://www.highperformanceformat.com/${adKey}/invoke.js`;
-    invokeScript.async = true;
+      // Load invoke script
+      const script = document.createElement('script');
+      script.src = 'https://www.highperformanceformat.com/' 
+        + adKey + '/invoke.js';
+      script.async = true;
+      script.onerror = () => console.log('Ad blocked');
 
-    if (ref.current) {
-      ref.current.appendChild(optionsScript);
-      ref.current.appendChild(invokeScript);
-    }
+      if (ref.current) {
+        ref.current.appendChild(script);
+      }
+    }, 1000);
+
   }, [adKey, height, width, uniqueId]);
 
   return (
     <div
+      id={'ad-' + uniqueId}
       ref={ref}
-      className="flex justify-center my-6"
-      style={{ minHeight: height }}
+      className="flex justify-center my-4"
+      style={{
+        minHeight: height + 'px',
+        width: '100%',
+        overflow: 'hidden'
+      }}
     />
   );
 }
