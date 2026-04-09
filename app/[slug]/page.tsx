@@ -428,12 +428,12 @@ export default async function SEOPage(
         />
          */}
 
-        <AdUnit
+        {/* <AdUnit
           adKey="8417fd24a6f755b707c66c5e90f75362"
           height={50}
           width={320}
           uniqueId="faq-ad-2"
-        />
+        /> */}
 
         {/* ── FAQ Section ── */}
         {page.faqs && page.faqs.length > 0 && (
