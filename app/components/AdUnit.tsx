@@ -5,12 +5,14 @@ interface AdUnitProps {
   adKey: string;
   height: number;
   width: number;
+  uniqueId: string; // ← Add this!
 }
 
 export default function AdUnit({
   adKey,
   height,
-  width
+  width,
+  uniqueId
 }: AdUnitProps) {
   const ref = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
@@ -19,29 +21,37 @@ export default function AdUnit({
     if (loaded.current) return;
     loaded.current = true;
 
-    // Set ad options
-    (window as any).atOptions = {
-      'key': adKey,
-      'format': 'iframe',
-      'height': height,
-      'width': width,
-      'params': {}
-    };
+    const container = document.createElement('div');
+    container.id = `ad-container-${uniqueId}`;
+    
+    // Create inline script for options
+    const optionsScript = document.createElement('script');
+    optionsScript.innerHTML = `
+      var atOptions_${uniqueId} = {
+        'key': '${adKey}',
+        'format': 'iframe',
+        'height': ${height},
+        'width': ${width},
+        'params': {}
+      };
+      atOptions = atOptions_${uniqueId};
+    `;
 
-    // Load ad script
-    const script = document.createElement('script');
-    script.src = `https://www.highperformanceformat.com/${adKey}/invoke.js`;
-    script.async = true;
+    // Create invoke script
+    const invokeScript = document.createElement('script');
+    invokeScript.src = `https://www.highperformanceformat.com/${adKey}/invoke.js`;
+    invokeScript.async = true;
 
     if (ref.current) {
-      ref.current.appendChild(script);
+      ref.current.appendChild(optionsScript);
+      ref.current.appendChild(invokeScript);
     }
-  }, [adKey, height, width]);
+  }, [adKey, height, width, uniqueId]);
 
   return (
     <div
       ref={ref}
-      className="flex justify-center my-4"
+      className="flex justify-center my-6"
       style={{ minHeight: height }}
     />
   );

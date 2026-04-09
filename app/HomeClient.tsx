@@ -197,6 +197,7 @@ export default function HomeClient() {
           adKey="8417fd24a6f755b707c66c5e90f75362"
           height={50}
           width={320}
+          uniqueId="home-mobile-ad"
         />
 
         {/* Footer */}

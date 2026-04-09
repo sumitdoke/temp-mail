@@ -396,6 +396,7 @@ export default async function SEOPage(
           adKey="285f7a3a830b78ba2bc47f294129ec09"
           height={250}
           width={300}
+          uniqueId="content-ad"
         />
 
 
@@ -423,6 +424,7 @@ export default async function SEOPage(
           adKey="285f7a3a830b78ba2bc47f294129ec09"
           height={250}
           width={300}
+          uniqueId="faq-ad"
         />
 
         {/* ── FAQ Section ── */}
