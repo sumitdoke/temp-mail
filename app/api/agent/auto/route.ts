@@ -121,154 +121,147 @@ export async function POST(req: Request) {
       model: google('gemini-2.5-flash-lite'),
       prompt: `
 You are an expert SEO content writer for
-tempmailin.in — a FREE Indian temp mail service.
+tempmailin.in — a FREE temp mail service.
 
 KEYWORD TO TARGET: "${nextKeyword}"
 
-RECENT ARTICLES ALREADY WRITTEN:
+RECENT ARTICLES WRITTEN (avoid repetition!):
 ${recentTitles}
-Make this article COMPLETELY different
-from above! Different angle, different
-opening, different examples!
+Write COMPLETELY different angle from above!
 
 ════════════════════════════════
-ANTI-REPETITION RULES (CRITICAL!):
+ANTI-REPETITION RULES:
 ════════════════════════════════
 - NEVER start with "In today's digital world"
 - NEVER start with "In this article we will"
 - NEVER start with "Are you tired of"
-- NEVER use "Furthermore" or "Moreover"  
-- NEVER repeat same sentence structure
+- NEVER use "Furthermore" or "Moreover"
+- NEVER write "Why Indians Need This" 
+  for non-India keywords!
 - Each article MUST have unique opening
-- Use specific Indian examples not generic
-- Add one unique tip nobody else mentions
+- Specific examples not generic statements
 
 ════════════════════════════════
-QUALITY RULES (Google E-E-A-T):
+DYNAMIC STRUCTURE RULES:
 ════════════════════════════════
-- Every paragraph must add NEW value
-- No filler sentences allowed
-- No obvious statements
-- Specific beats generic always
-- Show real expertise about temp mail
-- Include real India scenario in intro
-- Make reader feel understood
-- Example of BAD: "Privacy is important"
-- Example of GOOD: "After signing up on
-  Zomato with real email, Indians receive
-  4-5 spam emails every single week"
+Detect keyword type and adjust:
+
+IF keyword contains "usa" or "uk" or 
+"europe" or "germany" or "netherlands":
+USE this structure:
+## [Unique Hook for that country]
+## What is Temp Mail?
+## Why [Country] Users Need Temp Mail
+## How to Use TempMailin.in in [Country]
+## Step by Step Guide
+## Pro Tips for [Country] Users
+## Conclusion
+
+IF keyword contains "india" or "hindi"
+or Indian app names:
+USE this structure:
+## [Unique Hindi/English Hook]
+## Temp Mail Kya Hai?
+## [Indian App] Ke Liye Temp Mail Kyun?
+## Step by Step Guide (Hindi + English)
+## TempMailin.in Ke Faayde
+## Pro Tips
+## Conclusion
+
+IF keyword is GLOBAL (discord, reddit etc):
+USE this structure:
+## [Unique Hook About Platform]
+## What is Temp Mail?
+## Why Use Temp Mail for [Platform]
+## Step by Step Guide
+## Benefits and Warnings
+## Pro Tips
+## Conclusion
+
+════════════════════════════════
+WORD COUNT RULES (STRICT!):
+════════════════════════════════
+MINIMUM 1200 words — NO EXCEPTIONS!
+MAXIMUM 1500 words
+If you finish early ADD MORE:
+→ More detailed steps
+→ More examples
+→ Bigger FAQ answers
+→ More pro tips
+
+Count your words before returning!
+If under 1200 — keep writing!
 
 ════════════════════════════════
 SEO RULES:
 ════════════════════════════════
 - Keyword in FIRST 100 words (mandatory!)
 - Keyword in LAST paragraph (mandatory!)
-- Use exact keyword: 3-5 times only
-- Use keyword variations: 5-8 times
-- NEVER stuff keywords (spam penalty!)
+- Exact keyword: 3-5 times only
+- Keyword variations: 5-8 times
 - Minimum 5 H2 headings with ##
-- Use ### for subheadings where needed
-- Word count: 1000-1500 words exactly
-- Natural Hindi words mixed in throughout
-- Short sentences: maximum 20 words each
-- Short paragraphs: maximum 3 lines each
-
-════════════════════════════════
-CONTENT STRUCTURE (follow exactly):
-════════════════════════════════
-## [Unique Hook Related to Topic]
-   (NOT generic — relate to real India problem)
-
-## What is [Topic]?
-   (explain simply for Indian users)
-
-## Why Indians Need This in 2026
-   (specific India context)
-
-## Step by Step Guide
-   (numbered steps, very clear)
-
-## Pro Tips Nobody Tells You
-   (unique advice — this makes us stand out!)
-
-## Why Choose TempMailin.in
-   (mention our features naturally)
-
-## Conclusion
-   (call to action to use our tool)
+- Short sentences: max 20 words
+- Short paragraphs: max 3 lines
 
 ════════════════════════════════
 LANGUAGE RULES:
 ════════════════════════════════
-- Mix Hindi naturally: "Aap ko pata hai"
-  "Yeh bahut useful hai" etc
-- Simple English for non-Hindi sections
-- Friendly conversational tone
-- Write like helping a friend
-- NOT formal or corporate
+FOR INDIA keywords:
+- Mix Hindi naturally throughout
+- "Aap ko pata hai ki..."
+- "Yeh bahut kaam aata hai"
+- Friendly desi tone
+
+FOR USA/UK/EUROPE keywords:
+- Pure English only
+- Professional but friendly
+- NO Hindi words
+- Relate to their daily life
+
+FOR GLOBAL keywords:
+- Simple English
+- Casual friendly tone
+- Universal examples
 
 ════════════════════════════════
-META DESCRIPTION RULES:
+QUALITY RULES:
+════════════════════════════════
+- Every paragraph adds NEW value
+- No filler sentences
+- Specific beats generic
+- Real scenarios not hypothetical
+- Show expertise naturally
+- Include actual helpful tips
+
+════════════════════════════════
+META RULES:
 ════════════════════════════════
 - Exactly 150-160 characters
-- Must contain main keyword
-- Must have clear benefit
-- Must have call to action
-- Format: "[Keyword] ke liye free temp 
-  mail use karo. No signup. Auto-delete 
-  24hrs. Try tempmailin.in now! ✓"
+- Contains main keyword
+- Has clear benefit
+- Has call to action
 
 ════════════════════════════════
-FAQ RULES (critical for Google!):
+FAQ RULES:
 ════════════════════════════════
 - Exactly 5 FAQs
-- Questions people ACTUALLY Google
-- NOT generic questions
-- Answers: 50-100 words each
-- Include keyword in 2+ questions
-- Mix Hindi + English in answers
+- Real questions people Google
+- Answers: 80-100 words each
+  (longer = more words overall!)
+- Keyword in 2+ questions
+- Match language to keyword type
 
-════════════════════════════════
-SLUG RULES:
-════════════════════════════════
-- Maximum 60 characters
-- Lowercase only
-- Hyphens between words
-- Include main keyword
-- No special characters
-
-Return ONLY valid JSON.
-No markdown. No backticks. No extra text.
-Just pure JSON:
+Return ONLY valid JSON:
 {
-  "slug": "keyword-based-url-slug",
-  "title": "Keyword | Free & Instant — TempMailin.in",
-  "meta": "exactly 150-160 char description here",
-  "content": "full 1000-1500 word markdown article",
+  "slug": "url-slug-max-60-chars",
+  "title": "Keyword | TempMailin.in",
+  "meta": "150-160 chars",
+  "content": "1200-1500 word markdown",
   "faqs": [
-    {
-      "q": "Real question people search?",
-      "a": "Helpful 50-100 word answer here"
-    },
-    {
-      "q": "Second question with keyword?",
-      "a": "Answer here"
-    },
-    {
-      "q": "Third question?",
-      "a": "Answer here"
-    },
-    {
-      "q": "Fourth question?",
-      "a": "Answer here"
-    },
-    {
-      "q": "Fifth question?",
-      "a": "Answer here"
-    }
+    {"q": "Question?", "a": "80-100 word answer"}
   ]
 }
-      `
+`
     });
 
     // Clean JSON response
