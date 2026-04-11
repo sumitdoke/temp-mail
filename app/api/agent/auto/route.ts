@@ -270,8 +270,28 @@ Return ONLY valid JSON:
       .replace(/```/g, '')
       .trim();
 
+    // Log for debugging
+    console.log('Raw response length:', text.length);
+    console.log('Clean start:', clean.substring(0, 100));
+
+    // Find JSON in response
+    // Sometimes Gemini adds text before/after JSON!
+    const jsonStart = clean.indexOf('{');
+    const jsonEnd = clean.lastIndexOf('}');
+    
+    if (jsonStart === -1 || jsonEnd === -1) {
+      throw new Error('No JSON found in response: ' + clean.substring(0, 200));
+    }
+    
+    clean = clean.substring(jsonStart, jsonEnd + 1);
+
     // Parse article
-    const article = JSON.parse(clean);
+    let article;
+    try {
+      article = JSON.parse(clean);
+    } catch (parseError) {
+      throw new Error('JSON parse failed: ' + clean.substring(0, 200));
+    }
 
     // Validate minimum quality
     if (!article.slug || !article.title ||
