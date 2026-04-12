@@ -392,12 +392,12 @@ export default async function SEOPage(
         </article>
 
         {/* ad  */}
-        <AdUnit
+        {/* <AdUnit
           adKey="285f7a3a830b78ba2bc47f294129ec09"
           height={250}
           width={300}
           uniqueId="content-ad"
-        />
+        /> */}
 
 
         {/* ── Middle CTA ── */}

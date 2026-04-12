@@ -134,11 +134,11 @@ export default function HomeClient() {
         </div>
 
 
-        {/* Native Banner Ad */}
+        {/* Native Banner Ad
         <NativeBannerAd />
 
         {/* Inbox */}
-        <div className="bg-gray-900 rounded-2xl border border-gray-800"></div>
+        {/* <div className="bg-gray-900 rounded-2xl border border-gray-800"></div>  */}
 
 
         {/* Inbox */}
@@ -193,12 +193,12 @@ export default function HomeClient() {
 
 
         {/* 320x50 Mobile Ad */}
-        <AdUnit
+        {/* <AdUnit
           adKey="8417fd24a6f755b707c66c5e90f75362"
           height={50}
           width={320}
           uniqueId="home-mobile-ad"
-        />
+        /> */}
 
         {/* Footer */}
         <p className="text-center text-gray-700 text-xs mt-8"></p>
