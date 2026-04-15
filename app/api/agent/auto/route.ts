@@ -120,145 +120,36 @@ export async function POST(req: Request) {
     const { text } = await generateText({
       model: google('gemini-2.5-flash-lite'),
       prompt: `
-You are an expert SEO content writer for
-tempmailin.in — a FREE temp mail service.
+Write an SEO article for tempmailin.in
 
-KEYWORD TO TARGET: "${nextKeyword}"
+Topic: "${nextKeyword}"
 
-RECENT ARTICLES WRITTEN (avoid repetition!):
+Recent articles (write differently):
 ${recentTitles}
-Write COMPLETELY different angle from above!
 
-════════════════════════════════
-ANTI-REPETITION RULES:
-════════════════════════════════
-- NEVER start with "In today's digital world"
-- NEVER start with "In this article we will"
-- NEVER start with "Are you tired of"
-- NEVER use "Furthermore" or "Moreover"
-- NEVER write "Why Indians Need This" 
-  for non-India keywords!
-- Each article MUST have unique opening
-- Specific examples not generic statements
+Rules:
+1. Mix Hindi + English if India keyword
+2. Pure English if USA/UK/Europe keyword
+3. Minimum 1000 words
+4. Use ## for headings
+5. Include 5 FAQs at end
 
-════════════════════════════════
-DYNAMIC STRUCTURE RULES:
-════════════════════════════════
-Detect keyword type and adjust:
-
-IF keyword contains "usa" or "uk" or 
-"europe" or "germany" or "netherlands":
-USE this structure:
-## [Unique Hook for that country]
+Structure:
+## Introduction
 ## What is Temp Mail?
-## Why [Country] Users Need Temp Mail
-## How to Use TempMailin.in in [Country]
+## How to Use for ${nextKeyword}
 ## Step by Step Guide
-## Pro Tips for [Country] Users
+## Benefits
 ## Conclusion
 
-IF keyword contains "india" or "hindi"
-or Indian app names:
-USE this structure:
-## [Unique Hindi/English Hook]
-## Temp Mail Kya Hai?
-## [Indian App] Ke Liye Temp Mail Kyun?
-## Step by Step Guide (Hindi + English)
-## TempMailin.in Ke Faayde
-## Pro Tips
-## Conclusion
-
-IF keyword is GLOBAL (discord, reddit etc):
-USE this structure:
-## [Unique Hook About Platform]
-## What is Temp Mail?
-## Why Use Temp Mail for [Platform]
-## Step by Step Guide
-## Benefits and Warnings
-## Pro Tips
-## Conclusion
-
-════════════════════════════════
-WORD COUNT RULES (STRICT!):
-════════════════════════════════
-MINIMUM 1200 words — NO EXCEPTIONS!
-MAXIMUM 1500 words
-If you finish early ADD MORE:
-→ More detailed steps
-→ More examples
-→ Bigger FAQ answers
-→ More pro tips
-
-Count your words before returning!
-If under 1200 — keep writing!
-
-════════════════════════════════
-SEO RULES:
-════════════════════════════════
-- Keyword in FIRST 100 words (mandatory!)
-- Keyword in LAST paragraph (mandatory!)
-- Exact keyword: 3-5 times only
-- Keyword variations: 5-8 times
-- Minimum 5 H2 headings with ##
-- Short sentences: max 20 words
-- Short paragraphs: max 3 lines
-
-════════════════════════════════
-LANGUAGE RULES:
-════════════════════════════════
-FOR INDIA keywords:
-- Mix Hindi naturally throughout
-- "Aap ko pata hai ki..."
-- "Yeh bahut kaam aata hai"
-- Friendly desi tone
-
-FOR USA/UK/EUROPE keywords:
-- Pure English only
-- Professional but friendly
-- NO Hindi words
-- Relate to their daily life
-
-FOR GLOBAL keywords:
-- Simple English
-- Casual friendly tone
-- Universal examples
-
-════════════════════════════════
-QUALITY RULES:
-════════════════════════════════
-- Every paragraph adds NEW value
-- No filler sentences
-- Specific beats generic
-- Real scenarios not hypothetical
-- Show expertise naturally
-- Include actual helpful tips
-
-════════════════════════════════
-META RULES:
-════════════════════════════════
-- Exactly 150-160 characters
-- Contains main keyword
-- Has clear benefit
-- Has call to action
-
-════════════════════════════════
-FAQ RULES:
-════════════════════════════════
-- Exactly 5 FAQs
-- Real questions people Google
-- Answers: 80-100 words each
-  (longer = more words overall!)
-- Keyword in 2+ questions
-- Match language to keyword type
-
-Return ONLY valid JSON:
+Return ONLY this JSON with no extra text:
 {
-  "slug": "url-slug-max-60-chars",
-  "title": "Keyword | TempMailin.in",
-  "meta": "150-160 chars",
-  "content": "1200-1500 word markdown",
+  "slug": "keyword-url-slug",
+  "title": "Article Title Here",
+  "meta": "Description under 160 chars",
+  "content": "full article here",
   "faqs": [
-    {"q": "Question?", "a": "80-100 word answer"}
+    {"q": "Question?", "a": "Answer here"}
   ]
 }
 `
@@ -278,11 +169,11 @@ Return ONLY valid JSON:
     // Sometimes Gemini adds text before/after JSON!
     const jsonStart = clean.indexOf('{');
     const jsonEnd = clean.lastIndexOf('}');
-    
+
     if (jsonStart === -1 || jsonEnd === -1) {
       throw new Error('No JSON found in response: ' + clean.substring(0, 200));
     }
-    
+
     clean = clean.substring(jsonStart, jsonEnd + 1);
 
     // Parse article
@@ -294,9 +185,27 @@ Return ONLY valid JSON:
     }
 
     // Validate minimum quality
-    if (!article.slug || !article.title ||
-      !article.content || !article.faqs) {
-      throw new Error('Article missing required fields');
+    if (!article.slug) {
+      article.slug = nextKeyword
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '-')
+        .substring(0, 60);
+    }
+    if (!article.title) {
+      article.title = nextKeyword + ' | TempMailin.in';
+    }
+    if (!article.meta) {
+      article.meta = 'Free temp mail for ' +
+        nextKeyword + '. No signup. Try tempmailin.in!';
+    }
+    if (!article.content) {
+      throw new Error('Content missing - retry');
+    }
+    if (!article.faqs || !Array.isArray(article.faqs)) {
+      article.faqs = [{
+        q: 'What is temp mail?',
+        a: 'Temp mail is a free disposable email service.'
+      }];
     }
 
     // Ensure slug is clean
