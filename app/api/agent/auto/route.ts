@@ -36,6 +36,7 @@ const STRUCTURE_STYLES = [
 ];
 
 // ── CLUSTER DEFINITIONS WITH SCORES ─────────────
+// ── CLUSTER DEFINITIONS WITH SCORES ─────────────
 const CLUSTERS = {
   usa: {
     name: 'USA Cluster',
@@ -49,8 +50,13 @@ const CLUSTERS = {
       { kw: 'temp mail for steam games', cpc: 6, volume: 7, ease: 9 },
       { kw: 'does temp mail work for gmail', cpc: 8, volume: 9, ease: 7 },
       { kw: 'temp mail for roblox free', cpc: 5, volume: 8, ease: 9 },
+
+      // ✅ NEW (added)
+      { kw: 'temp mail usa no signup free 2026', cpc: 8, volume: 7, ease: 9 },
+      { kw: 'best temp mail usa features 2026', cpc: 8, volume: 6, ease: 9 },
     ]
   },
+
   europe: {
     name: 'Europe Cluster',
     hub: '/best-temp-mail-europe-2026',
@@ -63,6 +69,7 @@ const CLUSTERS = {
       { kw: 'temp mail spain free', cpc: 6, volume: 5, ease: 9 },
     ]
   },
+
   instagram: {
     name: 'Instagram Cluster',
     hub: '/temp-mail-for-instagram-india',
@@ -74,6 +81,7 @@ const CLUSTERS = {
       { kw: 'fake instagram account email india', cpc: 3, volume: 7, ease: 8 },
     ]
   },
+
   global: {
     name: 'Global Cluster',
     hub: '/best-temp-mail-usa-2026',
@@ -84,8 +92,12 @@ const CLUSTERS = {
       { kw: 'best temp mail that works 2026', cpc: 6, volume: 9, ease: 7 },
       { kw: 'temp mail without ads 2026', cpc: 5, volume: 7, ease: 8 },
       { kw: 'most reliable temp mail 2026', cpc: 6, volume: 8, ease: 7 },
+
+      // ✅ NEW (competitor keyword)
+      { kw: 'tempmailin vs tempmailusa comparison 2026', cpc: 7, volume: 7, ease: 8 },
     ]
   },
+
   india: {
     name: 'India OTP Cluster',
     hub: '/disposable-email-otp-india',
@@ -97,6 +109,18 @@ const CLUSTERS = {
       { kw: 'temp mail for gaming india', cpc: 2, volume: 7, ease: 8 },
       { kw: 'best free temp mail app india', cpc: 2, volume: 8, ease: 7 },
       { kw: 'temp mail for ott platforms india', cpc: 3, volume: 7, ease: 8 },
+    ]
+  },
+
+  // ✅ NEW CLUSTER (Nigeria)
+  nigeria: {
+    name: 'Nigeria Cluster',
+    hub: '/best-temp-mail-nigeria-2026',
+    priority: 6,
+    keywords: [
+      { kw: 'best temp mail nigeria 2026', cpc: 4, volume: 7, ease: 9 },
+      { kw: 'free disposable email nigeria', cpc: 3, volume: 7, ease: 9 },
+      { kw: 'temp mail nigeria no signup', cpc: 4, volume: 6, ease: 9 },
     ]
   }
 };
@@ -114,26 +138,45 @@ function selectCluster(
   // Count existing pages per cluster
   const counts: Record<string, number> = {
     usa: 0, europe: 0, instagram: 0,
-    global: 0, india: 0
+    global: 0, india: 0, nigeria: 0
   };
 
   existingPages.forEach((p: any) => {
-    const s = p.slug || '';
-    if (s.includes('usa') || s.includes('discord')
-      || s.includes('steam') || s.includes('chatgpt')
-      || s.includes('roblox') || s.includes('spotify'))
+    const s = (p.slug || '').toLowerCase();
+
+    if (
+      s.includes('usa') ||
+      s.includes('discord') ||
+      s.includes('steam') ||
+      s.includes('chatgpt') ||
+      s.includes('roblox') ||
+      s.includes('spotify')
+    ) {
       counts.usa++;
-    else if (s.includes('europe') || s.includes('germany')
-      || s.includes('netherlands') || s.includes('france')
-      || s.includes('spain') || s.includes('uk'))
+    } else if (
+      s.includes('europe') ||
+      s.includes('germany') ||
+      s.includes('netherlands') ||
+      s.includes('france') ||
+      s.includes('spain') ||
+      s.includes('uk')
+    ) {
       counts.europe++;
-    else if (s.includes('instagram'))
+    } else if (s.includes('instagram')) {
       counts.instagram++;
-    else if (s.includes('india') || s.includes('hindi')
-      || s.includes('otp') || s.includes('paytm')
-      || s.includes('whatsapp'))
+    } else if (
+      s.includes('india') ||
+      s.includes('hindi') ||
+      s.includes('otp') ||
+      s.includes('paytm') ||
+      s.includes('whatsapp')
+    ) {
       counts.india++;
-    else counts.global++;
+    } else if (s.includes('nigeria')) {
+      counts.nigeria++;
+    } else {
+      counts.global++;
+    }
   });
 
   // Score each cluster
@@ -219,29 +262,29 @@ function validateQuality(article: any): {
   const words = article.content?.split(' ').length || 0;
 
   if (words < 900) {
-    return { 
-      pass: false, 
+    return {
+      pass: false,
       score: '4/10',
       reason: `Only ${words} words - need 900+`
     };
   }
   if (!article.content?.includes('##')) {
-    return { 
-      pass: false, 
+    return {
+      pass: false,
       score: '5/10',
       reason: 'No H2 headings found'
     };
   }
   if (!article.faqs || article.faqs.length < 3) {
-    return { 
-      pass: false, 
+    return {
+      pass: false,
       score: '5/10',
       reason: 'Less than 3 FAQs'
     };
   }
   if (!article.slug) {
-    return { 
-      pass: false, 
+    return {
+      pass: false,
       score: '3/10',
       reason: 'No slug generated'
     };
@@ -249,10 +292,10 @@ function validateQuality(article: any): {
 
   const score = words > 1300 ? '9/10' :
     words > 1100 ? '8/10' :
-    words > 900 ? '7/10' : '6/10';
+      words > 900 ? '7/10' : '6/10';
 
-  return { 
-    pass: true, 
+  return {
+    pass: true,
     score,
     reason: `Passed with ${words} words`
   };
@@ -271,13 +314,20 @@ function getInternalLinks(
       const s = p.slug || '';
       if (clusterKey === 'usa')
         return s.includes('usa') || s.includes('disposable');
+
       if (clusterKey === 'instagram')
         return s.includes('instagram');
+
       if (clusterKey === 'europe')
         return s.includes('europe') || s.includes('uk')
           || s.includes('germany');
+
       if (clusterKey === 'india')
         return s.includes('india') || s.includes('otp');
+
+      if (clusterKey === 'nigeria')
+        return s.includes('nigeria');
+
       return true;
     })
     .slice(0, 2)
