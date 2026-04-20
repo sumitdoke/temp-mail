@@ -27,19 +27,21 @@ jobs:
 
           echo "Response: $response"
 
-          # Pass response to next step
-          echo "response=$response" >> $GITHUB_OUTPUT
+          # Save response for next step
+          echo "$response" > response.json
 
       - name: Validate Response
         run: |
           echo "🔍 Checking response..."
 
-          if [[ "${{ steps.trigger.outputs.response }}" == *"error"* ]]; then
+          # Check success safely
+          if grep -q '"success":true' response.json; then
+            echo "✅ Agent executed successfully!"
+          else
             echo "❌ Agent failed!"
+            cat response.json
             exit 1
           fi
-
-          echo "✅ Agent executed successfully!"
 
       - name: Completed
         run: echo "🎯 SEO Agent cycle completed!"
