@@ -2,25 +2,44 @@ name: Daily SEO Agent
 
 on:
   schedule:
-    - cron: '30 3 * * *'
-    - cron: '30 9 * * *'
-    - cron: '30 15 * * *'
+    # 7:30 PM IST (Best India + USA overlap)
+    - cron: '0 14 * * *'
   workflow_dispatch:
 
 jobs:
   run-seo-agent:
     runs-on: ubuntu-latest
+
     steps:
       - name: Trigger SEO Agent
+        id: trigger
         run: |
+          echo "🚀 Starting SEO Agent..."
+
           response=$(curl -s -L \
-            --max-time 60 \
+            --max-time 120 \
+            --retry 2 \
+            --retry-delay 5 \
             --request POST \
             --url "${{ secrets.SITE_URL }}/api/agent/auto" \
             --header 'Content-Type: application/json' \
-            --data '{"secret":"${{ secrets.AGENT_SECRET }}"}')
+            --data "{\"secret\":\"${{ secrets.AGENT_SECRET }}\"}")
+
           echo "Response: $response"
 
-      - name: Check Response
+          # Pass response to next step
+          echo "response=$response" >> $GITHUB_OUTPUT
+
+      - name: Validate Response
         run: |
-          echo "Agent completed!"
+          echo "🔍 Checking response..."
+
+          if [[ "${{ steps.trigger.outputs.response }}" == *"error"* ]]; then
+            echo "❌ Agent failed!"
+            exit 1
+          fi
+
+          echo "✅ Agent executed successfully!"
+
+      - name: Completed
+        run: echo "🎯 SEO Agent cycle completed!"
