@@ -36,7 +36,7 @@ const STRUCTURE_STYLES = [
 ];
 
 // ── CLUSTER DEFINITIONS WITH SCORES ─────────────
-// ── CLUSTER DEFINITIONS WITH SCORES ─────────────
+
 const CLUSTERS = {
   usa: {
     name: 'USA Cluster',
@@ -51,34 +51,59 @@ const CLUSTERS = {
       { kw: 'does temp mail work for gmail', cpc: 8, volume: 9, ease: 7 },
       { kw: 'temp mail for roblox free', cpc: 5, volume: 8, ease: 9 },
 
-      // ✅ NEW (added)
+      // NEW (no duplicates)
       { kw: 'temp mail usa no signup free 2026', cpc: 8, volume: 7, ease: 9 },
       { kw: 'best temp mail usa features 2026', cpc: 8, volume: 6, ease: 9 },
+      { kw: 'temp mail for tiktok usa', cpc: 6, volume: 7, ease: 9 },
+      { kw: 'temp mail for twitter usa', cpc: 6, volume: 7, ease: 9 },
+      { kw: 'temp mail for linkedin usa', cpc: 8, volume: 6, ease: 8 },
+      { kw: 'temp mail for github signup', cpc: 7, volume: 7, ease: 8 },
+      { kw: 'temp mail for openai signup', cpc: 9, volume: 8, ease: 8 },
+      { kw: 'temp mail for adobe free trial', cpc: 8, volume: 7, ease: 8 },
+      { kw: 'temp mail for microsoft account', cpc: 7, volume: 8, ease: 7 },
+      { kw: 'best burner email usa 2026', cpc: 7, volume: 7, ease: 8 },
+      { kw: 'temp mail that works with google', cpc: 8, volume: 8, ease: 7 },
+      { kw: 'disposable email for free trials usa', cpc: 9, volume: 8, ease: 7 },
     ]
   },
 
   europe: {
     name: 'Europe Cluster',
     hub: '/best-temp-mail-europe-2026',
-    priority: 8,
+    priority: 5,
     keywords: [
       { kw: 'best temp mail germany 2026', cpc: 8, volume: 6, ease: 9 },
       { kw: 'disposable email netherlands 2026', cpc: 8, volume: 5, ease: 9 },
       { kw: 'temp mail uk no signup 2026', cpc: 7, volume: 7, ease: 8 },
       { kw: 'temp mail france free 2026', cpc: 7, volume: 5, ease: 9 },
       { kw: 'temp mail spain free', cpc: 6, volume: 5, ease: 9 },
+
+      // NEW
+      { kw: 'temp mail austria free 2026', cpc: 7, volume: 5, ease: 9 },
+      { kw: 'temp mail sweden free 2026', cpc: 7, volume: 5, ease: 9 },
+      { kw: 'disposable email italy free', cpc: 6, volume: 5, ease: 9 },
+      { kw: 'temp mail poland free 2026', cpc: 5, volume: 6, ease: 9 },
+      { kw: 'temp mail canada free 2026', cpc: 7, volume: 7, ease: 8 },
+      { kw: 'temp mail australia free 2026', cpc: 7, volume: 7, ease: 8 },
     ]
   },
 
   instagram: {
     name: 'Instagram Cluster',
     hub: '/temp-mail-for-instagram-india',
-    priority: 7,
+    priority: 8,
     keywords: [
       { kw: 'temp mail for instagram india 2026', cpc: 3, volume: 8, ease: 7 },
       { kw: 'how to make multiple instagram accounts india', cpc: 2, volume: 9, ease: 8 },
       { kw: 'instagram without phone number india', cpc: 3, volume: 8, ease: 7 },
       { kw: 'fake instagram account email india', cpc: 3, volume: 7, ease: 8 },
+
+      // NEW
+      { kw: 'temp mail for instagram reels india 2026', cpc: 3, volume: 7, ease: 8 },
+      { kw: 'disposable email for instagram india', cpc: 3, volume: 7, ease: 8 },
+      { kw: 'temp mail for facebook india', cpc: 3, volume: 7, ease: 8 },
+      { kw: 'temp mail for twitter india', cpc: 3, volume: 6, ease: 8 },
+      { kw: 'temp mail for telegram india 2026', cpc: 3, volume: 7, ease: 8 },
     ]
   },
 
@@ -93,15 +118,22 @@ const CLUSTERS = {
       { kw: 'temp mail without ads 2026', cpc: 5, volume: 7, ease: 8 },
       { kw: 'most reliable temp mail 2026', cpc: 6, volume: 8, ease: 7 },
 
-      // ✅ NEW (competitor keyword)
-      { kw: 'tempmailin vs tempmailusa comparison 2026', cpc: 7, volume: 7, ease: 8 },
+      // competitor + expansion
+      { kw: 'tempmailin vs tempmailusa features comparison', cpc: 7, volume: 6, ease: 8 },
+      { kw: 'temp mail for canva free trial', cpc: 7, volume: 7, ease: 8 },
+      { kw: 'temp mail for netflix free trial 2026', cpc: 8, volume: 8, ease: 7 },
+      { kw: 'temp mail for amazon prime trial', cpc: 8, volume: 7, ease: 7 },
+      { kw: 'temp mail without verification 2026', cpc: 6, volume: 8, ease: 7 },
+      { kw: 'how to use temp mail safely', cpc: 5, volume: 8, ease: 7 },
+      { kw: 'temp mail that receives all emails', cpc: 6, volume: 7, ease: 7 },
+      { kw: 'is temp mail safe to use 2026', cpc: 5, volume: 8, ease: 7 },
     ]
   },
 
   india: {
     name: 'India OTP Cluster',
     hub: '/disposable-email-otp-india',
-    priority: 5,
+    priority: 9,
     keywords: [
       { kw: 'temp mail for online shopping india', cpc: 2, volume: 8, ease: 8 },
       { kw: 'fake email for free trial india', cpc: 3, volume: 7, ease: 8 },
@@ -109,18 +141,29 @@ const CLUSTERS = {
       { kw: 'temp mail for gaming india', cpc: 2, volume: 7, ease: 8 },
       { kw: 'best free temp mail app india', cpc: 2, volume: 8, ease: 7 },
       { kw: 'temp mail for ott platforms india', cpc: 3, volume: 7, ease: 8 },
+
+      // NEW
+      { kw: 'temp mail for ola india', cpc: 2, volume: 6, ease: 9 },
+      { kw: 'temp mail for uber india', cpc: 2, volume: 6, ease: 9 },
+      { kw: 'temp mail for nykaa india', cpc: 3, volume: 6, ease: 9 },
+      { kw: 'temp mail for ajio india', cpc: 3, volume: 6, ease: 9 },
+      { kw: 'temp mail for zepto india', cpc: 2, volume: 6, ease: 9 },
+      { kw: 'temp mail for dream11 india', cpc: 3, volume: 7, ease: 8 },
+      { kw: 'temp mail for mpl india', cpc: 3, volume: 6, ease: 9 },
+      { kw: 'temp mail for upstox india', cpc: 4, volume: 5, ease: 9 },
     ]
   },
 
-  // ✅ NEW CLUSTER (Nigeria)
   nigeria: {
     name: 'Nigeria Cluster',
     hub: '/best-temp-mail-nigeria-2026',
-    priority: 6,
+    priority: 7,
     keywords: [
       { kw: 'best temp mail nigeria 2026', cpc: 4, volume: 7, ease: 9 },
       { kw: 'free disposable email nigeria', cpc: 3, volume: 7, ease: 9 },
       { kw: 'temp mail nigeria no signup', cpc: 4, volume: 6, ease: 9 },
+      { kw: 'temp mail for nigerian websites', cpc: 3, volume: 6, ease: 9 },
+      { kw: 'disposable email address nigeria free', cpc: 3, volume: 6, ease: 9 },
     ]
   }
 };
