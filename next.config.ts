@@ -134,52 +134,57 @@ const nextConfig: NextConfig = {
       // 🇮🇳 India deleted pages → OTP page
       {
         source: '/temp-mail-swiggy-india-secure-anonymous',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
       {
         source: '/temp-mail-for-meesho-india-privacy-security',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
       {
         source: '/temp-mail-for-zomato-india-zomato-ke-liye-temporary-email',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
       {
         source: '/temp-mail-for-jiocinema-india',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
       {
         source: '/temp-mail-cred-india',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
       {
         source: '/temp-mail-for-rapido-india',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
       {
         source: '/temp-mail-myntra-india',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
       {
         source: '/temp-mail-phonepe-india',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
       {
         source: '/temp-mail-gpay-india-privacy-security',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
       {
         source: '/temp-mail-blinkit-india',
-        destination: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
+        permanent: true,
+      },
+      {
+        source: '/disposable-email-otp-india',
+        destination: '/best-temp-mail-india-2026',
         permanent: true,
       },
 

@@ -122,7 +122,7 @@ const CLUSTERS = {
 
   india: {
     name: 'India OTP Cluster',
-    hub: '/disposable-email-otp-india',
+    hub: '/best-temp-mail-india-2026',
     priority: 9,
     keywords: [
       { kw: 'temp mail for online shopping india', cpc: 2, volume: 8, ease: 8 },
