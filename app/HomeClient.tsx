@@ -108,12 +108,13 @@ export default function HomeClient() {
           <span style={{ fontSize: 20 }}>⚡</span>
           <span style={{
             fontWeight: 800, fontSize: 16,
-            background: `linear-gradient(135deg, ${t.accentLight}, #a78bfa)`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
+            color: t.accentLight,
+            // background: `linear-gradient(135deg, ${t.accentLight}, #a78bfa)`,
+            // WebkitBackgroundClip: 'text',
+            // WebkitTextFillColor: 'transparent',
             letterSpacing: '-0.3px',
           }}>
-            TempMailin.in
+            TempMailin
           </span>
           <span style={{
             background: t.success + '22',
@@ -154,9 +155,10 @@ export default function HomeClient() {
             Free Temporary Email
             <br />
             <span style={{
-              background: `linear-gradient(135deg, ${t.accentLight}, #a78bfa)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              color: t.accentLight,
+              // background: `linear-gradient(135deg, ${t.accentLight}, #a78bfa)`,
+              // WebkitBackgroundClip: 'text',
+              // WebkitTextFillColor: 'transparent',
             }}>
               India 🇮🇳
             </span>
