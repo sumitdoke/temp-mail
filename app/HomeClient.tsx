@@ -142,9 +142,6 @@ export default function HomeClient() {
 
       <div style={{ maxWidth: 600, margin: '0 auto', padding: '32px 20px 60px' }}>
 
-        <p style={{ fontSize: 12, color: t.muted, marginTop: 8 }}>
-          ✓ 100% Free • ✓ No Signup • ✓ OTP Ready
-        </p>
 
         {/* ── HERO ── */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
@@ -157,18 +154,26 @@ export default function HomeClient() {
             color: t.text,
           }}>
             Free Temp Mail India 🔥 <br />
-            <span style={{
-              color: t.accentLight,
-              // background: `linear-gradient(135deg, ${t.accentLight}, #a78bfa)`,
-              // WebkitBackgroundClip: 'text',
-              // WebkitTextFillColor: 'transparent',
-            }}>
-              Instant OTP Email (No Signup)
+            <span style={{ color: t.accentLight }}>
+              Instant OTP Email for Instagram, Paytm & More
             </span>
           </h1>
+
+          {/* 🔥 USE-CASE HOOK (MOST IMPORTANT LINE) */}
           <p style={{
-            color: t.muted, fontSize: 14,
-            margin: 0, lineHeight: 1.6,
+            fontSize: 13,
+            color: t.muted,
+            margin: '0 0 8px',
+            fontWeight: 500
+          }}>
+            Get OTP for Instagram, Paytm, Flipkart in seconds — without using your real email
+          </p>
+
+          <p style={{
+            color: t.muted,
+            fontSize: 14,
+            margin: 0,
+            lineHeight: 1.6,
           }}>
             Use temp mail for OTP verification on Instagram, Paytm, Flipkart & more — no signup, no spam, auto-deletes in 24hrs.
           </p>
@@ -667,19 +672,19 @@ export default function HomeClient() {
 
           <div style={{ lineHeight: 1.8 }}>
             <a href="/best-temp-mail-india-2026">
-              Best Temp Mail India (Free & No Signup)
+              Best Temp Mail India That Works for OTP (2026)
             </a><br />
 
             <a href="/temp-mail-for-instagram-india">
-              Use Temp Mail for Instagram Without Phone
+              Create Instagram Account Without Phone (India)
             </a><br />
 
             <a href="/temp-mail-paytm-india">
-              Temp Mail for Paytm OTP Verification
+              Receive Paytm OTP Without Real Email
             </a><br />
 
             <a href="/best-temp-mail-usa-2026">
-              Best Temp Mail USA for Free Trials
+              Temp Mail That Works for Netflix & Free Trials (USA)
             </a>
           </div>
         </div>
@@ -694,7 +699,7 @@ export default function HomeClient() {
             color: t.muted,
             margin: '0 0 6px',
           }}>
-            Free Temp Mail India for OTP verification — no signup required.
+            Free temp mail India for OTP verification — disposable email without signup.
           </p>
 
           <p style={{
