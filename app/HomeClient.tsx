@@ -142,6 +142,10 @@ export default function HomeClient() {
 
       <div style={{ maxWidth: 600, margin: '0 auto', padding: '32px 20px 60px' }}>
 
+        <p style={{ fontSize: 12, color: t.muted, marginTop: 8 }}>
+          ✓ 100% Free • ✓ No Signup • ✓ OTP Ready
+        </p>
+
         {/* ── HERO ── */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <h1 style={{
@@ -152,22 +156,21 @@ export default function HomeClient() {
             lineHeight: 1.15,
             color: t.text,
           }}>
-            Free Temporary Email
-            <br />
+            Free Temp Mail India 🔥 <br />
             <span style={{
               color: t.accentLight,
               // background: `linear-gradient(135deg, ${t.accentLight}, #a78bfa)`,
               // WebkitBackgroundClip: 'text',
               // WebkitTextFillColor: 'transparent',
             }}>
-              India 🇮🇳
+              Instant OTP Email (No Signup)
             </span>
           </h1>
           <p style={{
             color: t.muted, fontSize: 14,
             margin: 0, lineHeight: 1.6,
           }}>
-            Disposable email address — no signup, no spam, auto-deletes in 24hrs
+            Use temp mail for OTP verification on Instagram, Paytm, Flipkart & more — no signup, no spam, auto-deletes in 24hrs.
           </p>
         </div>
 
@@ -604,7 +607,7 @@ export default function HomeClient() {
             margin: '0 0 12px', lineHeight: 1.6,
           }}>
             Temp mail (temporary email or disposable email) is a free
-            service that gives you a throwaway email address instantly.
+            service that gives you a disposable email address instantly.
             Use it to sign up on websites without giving your real email.
             Perfect for avoiding spam, protecting privacy, and receiving
             OTPs on Indian apps like Swiggy, Zomato, and more.
@@ -619,20 +622,101 @@ export default function HomeClient() {
           </p>
         </div>
 
+        {/* ── WHY USE TEMP MAIL ── */}
+        <div style={{
+          background: t.card,
+          border: `1px solid ${t.border}`,
+          borderRadius: 20,
+          padding: 24,
+          marginBottom: 24,
+        }}>
+          <h2 style={{
+            fontSize: 16,
+            fontWeight: 800,
+            margin: '0 0 10px',
+          }}>
+            Why Use Temporary Email in India?
+          </h2>
+
+          <p style={{ fontSize: 13, color: t.muted, lineHeight: 1.6 }}>
+            Temporary email helps you avoid spam, protect your personal inbox,
+            and instantly receive OTPs without using your real email address.
+          </p>
+
+          <p style={{ fontSize: 13, color: t.muted, lineHeight: 1.6 }}>
+            In India, it is widely used for OTP verification, free trials,
+            and creating accounts on apps like Instagram, Paytm, and more.
+          </p>
+        </div>
+
+        {/* ── INTERNAL LINKS (SEO BOOST) ── */}
+        <div style={{
+          background: t.card,
+          border: `1px solid ${t.border}`,
+          borderRadius: 20,
+          padding: 24,
+          marginBottom: 24,
+        }}>
+          <h2 style={{
+            fontSize: 16,
+            fontWeight: 800,
+            margin: '0 0 14px',
+          }}>
+            Popular Guides
+          </h2>
+
+          <div style={{ lineHeight: 1.8 }}>
+            <a href="/best-temp-mail-india-2026">
+              Best Temp Mail India (Free & No Signup)
+            </a><br />
+
+            <a href="/temp-mail-for-instagram-india">
+              Use Temp Mail for Instagram Without Phone
+            </a><br />
+
+            <a href="/temp-mail-paytm-india">
+              Temp Mail for Paytm OTP Verification
+            </a><br />
+
+            <a href="/best-temp-mail-usa-2026">
+              Best Temp Mail USA for Free Trials
+            </a>
+          </div>
+        </div>
+
         {/* ── FOOTER ── */}
         <div style={{
           textAlign: 'center',
           paddingTop: 8,
         }}>
           <p style={{
-            fontSize: 12, color: t.muted,
-            margin: '0 0 8px',
+            fontSize: 12,
+            color: t.muted,
+            margin: '0 0 6px',
           }}>
-            Emails auto-delete after 24 hours • No signup required
+            Free Temp Mail India for OTP verification — no signup required.
           </p>
+
           <p style={{
-            fontSize: 12, color: t.muted,
-            margin: '0 0 12px',
+            fontSize: 12,
+            color: t.muted,
+            margin: '0 0 6px',
+          }}>
+            Avoid spam, protect your inbox, and use temporary email safely.
+          </p>
+
+          <p style={{
+            fontSize: 12,
+            color: t.muted,
+            margin: '0 0 10px',
+          }}>
+            Emails auto-delete after 24 hours • 100% free disposable email service
+          </p>
+
+          <p style={{
+            fontSize: 12,
+            color: t.muted,
+            margin: 0,
           }}>
             Made with ❤️ for India 🇮🇳
           </p>
