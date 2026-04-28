@@ -153,29 +153,27 @@ export default function HomeClient() {
             lineHeight: 1.15,
             color: t.text,
           }}>
-            Free Temp Mail India 🔥 <br />
+            Temp Mail India That Actually Works for OTP 🔥 <br />
             <span style={{ color: t.accentLight }}>
-              Instant OTP Email for Instagram, Paytm & More
+              Instant Temporary Email for Instagram, Paytm & More (Tested 2026)
             </span>
           </h1>
 
-          {/* 🔥 USE-CASE HOOK (MOST IMPORTANT LINE) */}
           <p style={{
             fontSize: 13,
             color: t.muted,
-            margin: '0 0 8px',
-            fontWeight: 500
+            marginBottom: 12,
+            lineHeight: 1.6,
           }}>
-            Get OTP for Instagram, Paytm, Flipkart in seconds — without using your real email
+            Get OTP from Instagram, Paytm & Flipkart instantly — without using your real email.
           </p>
 
           <p style={{
+            fontSize: 12,
             color: t.muted,
-            fontSize: 14,
-            margin: 0,
-            lineHeight: 1.6,
+            marginBottom: 16,
           }}>
-            Use temp mail for OTP verification on Instagram, Paytm, Flipkart & more — no signup, no spam, auto-deletes in 24hrs.
+            No signup • Auto-deletes in 24 hours • Works with Indian OTP apps 🇮🇳
           </p>
         </div>
 
