@@ -689,51 +689,57 @@ export default function HomeClient() {
         {/* ── FOOTER ── */}
         <div style={{
           textAlign: 'center',
-          paddingTop: 8,
+          paddingTop: 20,
+          borderTop: `1px solid ${t.border}`,
+          marginTop: 20,
         }}>
+
+          {/* BRAND LINE */}
           <p style={{
-            fontSize: 12,
-            color: t.muted,
+            fontSize: 13,
+            fontWeight: 600,
+            color: t.text,
             margin: '0 0 6px',
           }}>
-            Free temp mail India for OTP verification — disposable email without signup.
+            TempMailin — Free Temp Mail India
           </p>
 
+          {/* SHORT VALUE LINE */}
           <p style={{
             fontSize: 12,
             color: t.muted,
-            margin: '0 0 6px',
+            margin: '0 0 12px',
           }}>
-            Avoid spam, protect your inbox, and use temporary email safely.
+            Instant OTP email • No signup • Auto-delete in 24h
           </p>
 
-          <p style={{
-            fontSize: 12,
-            color: t.muted,
-            margin: '0 0 10px',
-          }}>
-            Emails auto-delete after 24 hours • 100% free disposable email service
-          </p>
-
-          <p style={{
-            fontSize: 12,
-            color: t.muted,
-            margin: 0,
-          }}>
-            Made with ❤️ for India 🇮🇳
-          </p>
+          {/* LINKS */}
           <div style={{
-            display: 'flex', justifyContent: 'center', gap: 20,
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 16,
+            marginBottom: 12,
           }}>
-            {[['Privacy Policy', '/privacy'], ['Terms of Service', '/terms']].map(([label, href]) => (
+            {[['Privacy', '/privacy'], ['Terms', '/terms']].map(([label, href]) => (
               <a key={label} href={href} style={{
-                fontSize: 12, color: t.muted,
+                fontSize: 12,
+                color: t.muted,
                 textDecoration: 'none',
               }}>
                 {label}
               </a>
             ))}
           </div>
+
+          {/* COUNTRY TAG */}
+          <p style={{
+            fontSize: 11,
+            color: t.muted,
+            margin: 0,
+          }}>
+            Built for India
+          </p>
+
         </div>
 
       </div>
