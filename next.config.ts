@@ -1,11 +1,27 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // ─────────────────────────────
+  // ⚡ PERFORMANCE + CORE SETTINGS
+  // ─────────────────────────────
   images: {
     formats: ['image/avif', 'image/webp'],
   },
   compress: true,
   poweredByHeader: false,
+
+  // ✅ NEW: Optimize package imports
+  experimental: {
+    optimizePackageImports: [
+      '@supabase/supabase-js',
+      'react-markdown'
+    ]
+  },
+
+  // ✅ NEW: Remove console logs in production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production'
+  },
 
   // ─────────────────────────────
   // 🔁 REDIRECTS (SEO FIX)
@@ -70,7 +86,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
-      // 🇺🇸 USA duplicates (SAFE ONLY)
+      // 🇺🇸 USA duplicates
       {
         source: '/temp-mail-usa-no-registration',
         destination: '/temp-mail-no-registration-usa',
@@ -124,14 +140,14 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
-      // 🌍 Europe (light merge)
+      // 🌍 Europe
       {
         source: '/temp-mail-france-free',
         destination: '/best-temp-mail-europe-2026',
         permanent: true,
       },
 
-      // 🇮🇳 India deleted pages → OTP page
+      // 🇮🇳 India → main
       {
         source: '/temp-mail-swiggy-india-secure-anonymous',
         destination: '/best-temp-mail-india-2026',
@@ -192,7 +208,7 @@ const nextConfig: NextConfig = {
   },
 
   // ─────────────────────────────
-  // 🔐 HEADERS (UNCHANGED + GOOD)
+  // 🔐 SECURITY HEADERS
   // ─────────────────────────────
   async headers() {
     return [
