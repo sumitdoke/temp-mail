@@ -248,7 +248,7 @@ function pickKeyword(
       const kwWords = kw.split(' ').filter(w => w.length > 3);
       const usedWords = used.split(' ').filter((w: string) => w.length > 3);
       const matches = kwWords.filter(w => usedWords.includes(w)).length;
-      return matches / kwWords.length > 0.5;
+      return matches / kwWords.length > 0.7;
     });
   });
 
@@ -282,7 +282,7 @@ function checkIntent(
       w => existing.includes(w)
     ).length;
 
-    if (matches / newWords.length > 0.55) {
+    if (matches / newWords.length > 0.75) {
       console.log(`Intent overlap: "${keyword}" vs "${page.keyword}"`);
       return false;
     }
