@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
-export const revalidate = 3600; // Cache 1 hour
+export const revalidate = 3600; // 1 hour cache
 
 export default async function sitemap():
   Promise<MetadataRoute.Sitemap> {
@@ -16,49 +16,76 @@ export default async function sitemap():
 
     const { data: pages } = await supabase
       .from('seo_pages')
-      .select('slug, published_at')
+      .select('slug, updated_at, published_at, published')
+      .eq('published', true)
       .order('published_at', { ascending: false });
 
     const staticPages: MetadataRoute.Sitemap = [
       {
         url: baseUrl,
-        lastModified: new Date(),
+        lastModified: new Date('2026-05-01'),
         changeFrequency: 'daily',
         priority: 1,
       },
+
       {
         url: `${baseUrl}/privacy`,
-        lastModified: new Date(),
+        lastModified: new Date('2026-05-01'),
         changeFrequency: 'monthly',
         priority: 0.3,
       },
+
       {
         url: `${baseUrl}/terms`,
-        lastModified: new Date(),
+        lastModified: new Date('2026-05-01'),
         changeFrequency: 'monthly',
         priority: 0.3,
+      },
+
+      {
+        url: `${baseUrl}/best-temp-mail-india-2026`,
+        lastModified: new Date('2026-05-01'),
+        changeFrequency: 'weekly',
+        priority: 0.9,
+      },
+
+      {
+        url: `${baseUrl}/best-temp-mail-usa-2026`,
+        lastModified: new Date('2026-05-01'),
+        changeFrequency: 'weekly',
+        priority: 0.9,
       },
     ];
 
     const dynamicPages: MetadataRoute.Sitemap =
-      pages?.map(page => ({
+      pages?.map((page) => ({
         url: `${baseUrl}/${page.slug}`,
-        lastModified: new Date(page.published_at),
+
+        lastModified: new Date(
+          page.updated_at || page.published_at
+        ),
+
         changeFrequency: 'weekly' as const,
-        priority: 0.8,
+
+        priority:
+          page.slug.includes('best-temp-mail')
+            ? 0.9
+            : page.slug.includes('instagram')
+            ? 0.8
+            : 0.7,
       })) || [];
 
     return [...staticPages, ...dynamicPages];
 
   } catch (error) {
-    // Return at least static pages if DB fails
+
     return [
       {
         url: baseUrl,
-        lastModified: new Date(),
+        lastModified: new Date('2026-05-01'),
         changeFrequency: 'daily',
         priority: 1,
-      }
+      },
     ];
   }
 }
