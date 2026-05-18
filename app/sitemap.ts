@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
-export const revalidate = 3600; // 1 hour cache
+export const revalidate = 3600;
 
 export default async function sitemap():
   Promise<MetadataRoute.Sitemap> {
@@ -16,8 +16,7 @@ export default async function sitemap():
 
     const { data: pages } = await supabase
       .from('seo_pages')
-      .select('slug, updated_at, published_at, published')
-      .eq('published', true)
+      .select('slug, published_at')
       .order('published_at', { ascending: false });
 
     const staticPages: MetadataRoute.Sitemap = [
@@ -27,28 +26,24 @@ export default async function sitemap():
         changeFrequency: 'daily',
         priority: 1,
       },
-
       {
         url: `${baseUrl}/privacy`,
         lastModified: new Date('2026-05-01'),
         changeFrequency: 'monthly',
         priority: 0.3,
       },
-
       {
         url: `${baseUrl}/terms`,
         lastModified: new Date('2026-05-01'),
         changeFrequency: 'monthly',
         priority: 0.3,
       },
-
       {
         url: `${baseUrl}/best-temp-mail-india-2026`,
         lastModified: new Date('2026-05-01'),
         changeFrequency: 'weekly',
         priority: 0.9,
       },
-
       {
         url: `${baseUrl}/best-temp-mail-usa-2026`,
         lastModified: new Date('2026-05-01'),
@@ -60,25 +55,26 @@ export default async function sitemap():
     const dynamicPages: MetadataRoute.Sitemap =
       pages?.map((page) => ({
         url: `${baseUrl}/${page.slug}`,
-
-        lastModified: new Date(
-          page.updated_at || page.published_at
-        ),
-
+        lastModified: new Date(page.published_at),
         changeFrequency: 'weekly' as const,
-
         priority:
-          page.slug.includes('best-temp-mail')
-            ? 0.9
-            : page.slug.includes('instagram')
-            ? 0.8
-            : 0.7,
+          page.slug.includes('best-temp-mail') ? 0.9 :
+          page.slug.includes('nigeria') ? 0.85 :
+          page.slug.includes('instagram') ? 0.8 :
+          page.slug.includes('usa') ? 0.8 :
+          0.7,
       })) || [];
 
-    return [...staticPages, ...dynamicPages];
+    // Remove duplicates
+    const allPages = [...staticPages, ...dynamicPages];
+    const seen = new Set();
+    return allPages.filter(page => {
+      if (seen.has(page.url)) return false;
+      seen.add(page.url);
+      return true;
+    });
 
   } catch (error) {
-
     return [
       {
         url: baseUrl,
