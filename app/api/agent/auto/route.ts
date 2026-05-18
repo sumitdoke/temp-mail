@@ -42,7 +42,7 @@ const CLUSTERS = {
   usa: {
     name: 'USA Cluster',
     hub: '/best-temp-mail-usa-2026',
-    priority: 10,
+    priority: 6,
     keywords: [
       { kw: 'best disposable email usa 2026', cpc: 9, volume: 8, ease: 6 },
       { kw: 'temp mail for discord usa', cpc: 7, volume: 7, ease: 9 },
@@ -64,7 +64,7 @@ const CLUSTERS = {
   europe: {
     name: 'Europe Cluster',
     hub: '/best-temp-mail-europe-2026',
-    priority: 5,
+    priority: 4,
     keywords: [
       { kw: 'best temp mail germany 2026', cpc: 8, volume: 6, ease: 9 },
       { kw: 'disposable email netherlands 2026', cpc: 8, volume: 5, ease: 9 },
@@ -82,7 +82,7 @@ const CLUSTERS = {
   instagram: {
     name: 'Instagram Cluster',
     hub: '/temp-mail-for-instagram-india',
-    priority: 8,
+    priority: 9,
     keywords: [
       { kw: 'temp mail for instagram india 2026', cpc: 3, volume: 8, ease: 7 },
       { kw: 'how to make multiple instagram accounts india', cpc: 2, volume: 9, ease: 8 },
@@ -102,7 +102,7 @@ const CLUSTERS = {
   global: {
     name: 'Global Cluster',
     hub: '/best-temp-mail-usa-2026',
-    priority: 6,
+    priority: 7,
     keywords: [
       { kw: 'does temp mail work 2026', cpc: 5, volume: 9, ease: 7 },
       { kw: 'why temp mail gets blocked', cpc: 4, volume: 7, ease: 9 },
@@ -123,7 +123,7 @@ const CLUSTERS = {
   india: {
     name: 'India OTP Cluster',
     hub: '/best-temp-mail-india-2026',
-    priority: 9,
+    priority: 10,
     keywords: [
       { kw: 'temp mail for online shopping india', cpc: 2, volume: 8, ease: 8 },
       { kw: 'fake email for free trial india', cpc: 3, volume: 7, ease: 8 },
@@ -144,7 +144,7 @@ const CLUSTERS = {
   nigeria: {
     name: 'Nigeria Cluster',
     hub: '/best-temp-mail-nigeria-2026',
-    priority: 7,
+    priority: 8,
     keywords: [
       { kw: 'best temp mail nigeria 2026', cpc: 4, volume: 7, ease: 9 },
       { kw: 'free disposable email nigeria', cpc: 3, volume: 7, ease: 9 },
