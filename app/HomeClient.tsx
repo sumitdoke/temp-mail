@@ -686,6 +686,7 @@ export default function HomeClient() {
           </div>
         </div>
 
+
         {/* ── FOOTER ── */}
         <div style={{
           textAlign: 'center',
